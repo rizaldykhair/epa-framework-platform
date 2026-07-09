@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard · EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="content">
+      <div class="topbar">
+        <span id="userInfo"></span>
+        <button type="button" id="logoutBtn" class="ghost">Sign Out</button>
+      </div>
+
+      <header class="hero">
+        <div>
+          <span class="badge">Evolutionary Prototyping Agile</span>
+          <h1>Admin Dashboard</h1>
+          <p>Full control over all projects, users, and artifacts across the EPA Framework.</p>
+        </div>
+        <div class="hero-card">
+          <p class="small">Release Readiness</p>
+          <h2 id="releaseScore">0%</h2>
+          <span>average across all projects</span>
+        </div>
+      </header>
+
+      <main>
+        <section id="section-dashboard" class="page-section">
+          <div class="grid metrics">
+            <article><p>Total Projects</p><h3 id="m-totalProjects">0</h3></article>
+            <article><p>Total Users</p><h3 id="m-totalUsers">0</h3></article>
+            <article><p>Active Sprints</p><h3 id="m-activeSprints">0</h3></article>
+            <article><p>Total Backlog</p><h3 id="m-totalBacklog">0</h3></article>
+            <article><p>Total Feedback</p><h3 id="m-totalFeedback">0</h3></article>
+            <article><p>Feedback Conversion</p><h3 id="m-feedbackRate">0%</h3></article>
+            <article><p>Total Test Cases</p><h3 id="m-totalTests">0</h3></article>
+            <article><p>Open Defects</p><h3 id="m-openDefects">0</h3></article>
+          </div>
+          <div class="two-col">
+            <div class="panel">
+              <div class="section-head"><h2>Project Progress Summary</h2></div>
+              <div class="table-wrap">
+                <table id="progressTable"><thead><tr><th>Project</th><th>Backlog Done</th></tr></thead><tbody></tbody></table>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="section-head"><h2>Recent System Activity</h2></div>
+              <div class="table-wrap">
+                <table id="activityTable"><thead><tr><th>User</th><th>Action</th><th>Entity</th><th>When</th></tr></thead><tbody></tbody></table>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-head"><h2>EPA Phase Overview</h2><button type="button" id="syncAllBtn" class="secondary">Sync All Projects</button></div>
+            <div class="grid metrics">
+              <article><p>Initial Phase</p><h3 id="epa-initial">0</h3></article>
+              <article><p>Dev &amp; Testing Phase</p><h3 id="epa-devtest">0</h3></article>
+              <article><p>Release Phase</p><h3 id="epa-release">0</h3></article>
+              <article><p>EPA Aligned</p><h3 id="epa-aligned">0</h3></article>
+            </div>
+            <div class="two-col">
+              <div>
+                <h4>Incomplete / Blocked Projects</h4>
+                <div class="table-wrap"><table id="epaIncompleteTable"><thead><tr><th>Project</th><th>Current Step</th><th>Missing Artifacts</th></tr></thead><tbody></tbody></table></div>
+              </div>
+              <div>
+                <h4>Ready for Next Step</h4>
+                <div class="table-wrap"><table id="epaReadyTable"><thead><tr><th>Project</th><th>Current Step</th></tr></thead><tbody></tbody></table></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-users" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>User Management</h2><button type="button" id="addUserBtn">Add User</button></div>
+            <div class="table-wrap">
+              <table id="usersTable"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-roles" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Role Management</h2><p>Roles are fixed according to the EPA Framework definition.</p></div>
+            <div class="table-wrap"><table id="rolesTable"><thead><tr><th>ID</th><th>Role</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-projects" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Project Management</h2><button type="button" id="addProjectBtn">Add Project</button></div>
+            <div class="table-wrap">
+              <table id="projectsTable"><thead><tr><th>Name</th><th>Type</th><th>EPA Phase</th><th>Status</th><th>EPA Completion</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="section-head"><h2>Project Members</h2></div>
+            <select id="memberProjectSelect"></select>
+            <div class="table-wrap">
+              <table id="membersTable"><thead><tr><th>Name</th><th>Email</th><th>Role in Project</th><th>Responsibility</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+            <button type="button" id="addMemberBtn">Add Member</button>
+          </div>
+        </section>
+
+        <section id="section-phases" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>EPA Phase Management</h2>
+              <select id="phasesProjectSelect"></select>
+            </div>
+            <button type="button" id="addPhaseBtn">Add Phase</button>
+            <div class="timeline" id="phasesTimeline"></div>
+          </div>
+        </section>
+
+        <section id="section-backlog" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Project Adaptive Backlog</h2>
+              <select id="backlogProjectSelect"></select>
+            </div>
+            <button type="button" id="addBacklogBtn">Add Item</button>
+            <div class="table-wrap">
+              <table id="backlogTable"><thead><tr><th>ID</th><th>User Story</th><th>Priority</th><th>Status</th><th>Assigned</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-sprints" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Sprint Management</h2>
+              <select id="sprintsProjectSelect"></select>
+            </div>
+            <button type="button" id="addSprintBtn">Add Sprint</button>
+            <div class="table-wrap">
+              <table id="sprintsTable"><thead><tr><th>Name</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-prototypes" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Prototype Increment Management</h2>
+              <select id="prototypesProjectSelect"></select>
+            </div>
+            <button type="button" id="addPrototypeBtn">Add Prototype</button>
+            <div class="table-wrap">
+              <table id="prototypesTable"><thead><tr><th>Version</th><th>Status</th><th>Last Updated</th><th>Demo URL</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+            <div id="prototypePreviewWrap"></div>
+          </div>
+        </section>
+
+        <section id="section-feedback" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>User Feedback Management</h2>
+              <select id="feedbackProjectSelect"></select>
+            </div>
+            <div class="table-wrap">
+              <table id="feedbackTable"><thead><tr><th>ID</th><th>Finding</th><th>Decision</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-testing" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Testing Matrix</h2>
+              <select id="testingProjectSelect"></select>
+            </div>
+            <div class="table-wrap">
+              <table id="testingTable"><thead><tr><th>Code</th><th>Scenario</th><th>Type</th><th>Result</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-defects" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Defect Tracking</h2>
+              <select id="defectsProjectSelect"></select>
+            </div>
+            <div class="table-wrap">
+              <table id="defectsTable"><thead><tr><th>Description</th><th>Severity</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-release" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Release Checklist</h2>
+              <select id="releaseProjectSelect"></select>
+            </div>
+            <button type="button" id="addChecklistBtn">Add Item</button>
+            <ul class="checklist" id="releaseList"></ul>
+          </div>
+        </section>
+
+        <section id="section-retrospective" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head">
+              <h2>Product Retrospective</h2>
+              <select id="retroProjectSelect"></select>
+            </div>
+            <button type="button" id="addRetroBtn">Add Retrospective</button>
+            <div class="retro-grid" id="retroGrid"></div>
+          </div>
+        </section>
+
+        <section id="section-reports" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Reports &amp; Analytics</h2><a href="simulation.html"><button type="button">EPA Project Simulation: Smart Laundry</button></a></div>
+            <div class="table-wrap">
+              <table id="reportProgressTable"><thead><tr><th>Project</th><th>Total Backlog</th><th>Done</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-audit" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Audit Logs</h2></div>
+            <div class="table-wrap">
+              <table id="auditTable"><thead><tr><th>User</th><th>Action</th><th>Entity</th><th>When</th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-settings" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>System Settings</h2></div>
+            <p><b>Signed in as:</b> <span id="settingsName"></span></p>
+            <p><b>Email:</b> <span id="settingsEmail"></span></p>
+            <p><b>Role:</b> <span id="settingsRole"></span></p>
+            <p><b>API Base URL:</b> <span id="settingsApi"></span></p>
+          </div>
+        </section>
+      </main>
+      <footer>Admin Dashboard · EPA Framework Platform</footer>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modalTitle">Form</h3>
+      <div id="modalBody"></div>
+      <p id="modalError" class="error-text"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel" class="ghost">Cancel</button>
+        <button type="button" id="modalSubmit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/sidebar.js?v=4"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/admin.js?v=2"></script>
+</body>
+</html>

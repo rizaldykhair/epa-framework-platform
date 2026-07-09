@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPA Framework Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css?v=2" />
+</head>
+<body class="login-page">
+  <div class="login-shell">
+    <aside class="login-brand">
+      <div class="login-brand-inner">
+        <span class="login-logo">EPA</span>
+        <h1>EPA Framework Platform</h1>
+        <p class="login-subtitle">Evolutionary Prototyping Agile for Adaptive Software Development</p>
+        <p class="login-desc">This platform supports adaptive software system development through requirements, adaptive backlog, sprints, prototypes, feedback, testing, release, and retrospective.</p>
+
+        <div class="login-phases">
+          <div class="login-phase">
+            <span class="login-phase-num">1</span>
+            <div><strong>Initial Phase</strong><span>Requirement &amp; Adaptive Backlog</span></div>
+          </div>
+          <div class="login-phase">
+            <span class="login-phase-num">2</span>
+            <div><strong>Dev &amp; Testing Phase</strong><span>Prototype, Feedback, Iteration &amp; Testing</span></div>
+          </div>
+          <div class="login-phase">
+            <span class="login-phase-num">3</span>
+            <div><strong>Release Phase</strong><span>Release, Deployment &amp; Retrospective</span></div>
+          </div>
+        </div>
+
+        <div class="login-roles">
+          <span class="role-chip">Admin</span>
+          <span class="role-chip">Product Owner</span>
+          <span class="role-chip">Developer</span>
+          <span class="role-chip">Tester</span>
+          <span class="role-chip">Evaluator</span>
+        </div>
+
+        <p class="login-footer-note">AI-Embedded Prototype Generator · EPA Workflow Engine · Phase Gate Validation</p>
+      </div>
+    </aside>
+
+    <section class="login-formside">
+      <form id="loginForm" class="login-card" novalidate>
+        <h2>Welcome Back</h2>
+        <p class="login-form-subtitle">Sign in to access your EPA Framework dashboard</p>
+
+        <label for="loginEmail">Email Address</label>
+        <input type="email" id="loginEmail" required placeholder="name@epa.local" autocomplete="username" />
+        <p class="field-error" id="emailError"></p>
+
+        <label for="loginPassword">Password</label>
+        <div class="password-field">
+          <input type="password" id="loginPassword" required placeholder="Enter your password" autocomplete="current-password" />
+          <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">Show</button>
+        </div>
+        <p class="field-error" id="passwordError"></p>
+
+        <div class="login-row">
+          <label class="checkbox-label"><input type="checkbox" id="rememberMe" /> Remember me</label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <p id="loginMessage" class="login-message" role="status" aria-live="polite"></p>
+
+        <button type="submit" id="loginSubmitBtn">Sign In to Dashboard</button>
+      </form>
+
+      <div class="demo-card">
+        <button type="button" id="toggleDemoBtn" class="demo-toggle-btn" aria-expanded="false">View Demo Accounts</button>
+        <div id="demoAccounts" class="demo-accounts hidden">
+          <div class="demo-account" data-email="admin@epa.local"><span><b>Administrator</b><br>admin@epa.local</span><button type="button" class="use-demo-btn">Use</button></div>
+          <div class="demo-account" data-email="po@epa.local"><span><b>Product Owner</b><br>po@epa.local</span><button type="button" class="use-demo-btn">Use</button></div>
+          <div class="demo-account" data-email="dev@epa.local"><span><b>Developer</b><br>dev@epa.local</span><button type="button" class="use-demo-btn">Use</button></div>
+          <div class="demo-account" data-email="tester@epa.local"><span><b>QA Tester</b><br>tester@epa.local</span><button type="button" class="use-demo-btn">Use</button></div>
+          <div class="demo-account" data-email="evaluator@epa.local"><span><b>User Evaluator</b><br>evaluator@epa.local</span><button type="button" class="use-demo-btn">Use</button></div>
+          <p class="demo-password-note">Password for all demo accounts: <code>password123</code></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/api.js?v=2"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/pages/login.js?v=2"></script>
+</body>
+</html>

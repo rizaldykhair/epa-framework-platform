@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project EPA Workflow — EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="topbar">
+    <span id="userInfo"></span>
+    <button type="button" id="backBtn" class="ghost">Back to Dashboard</button>
+  </div>
+
+  <header class="hero">
+    <div>
+      <span class="badge">Evolutionary Prototyping Agile</span>
+      <h1 id="projectName">Project</h1>
+      <p id="projectMeta"></p>
+    </div>
+    <div class="hero-card">
+      <p class="small">EPA COMPLETION</p>
+      <h2 id="completionPct">0%</h2>
+      <span id="epaStatusPill"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" id="epaSummarySection">
+      <div class="section-head"><h2>EPA Workflow Progress</h2>
+        <div class="row-actions">
+          <button type="button" id="syncBtn" class="secondary">Sync EPA Status</button>
+          <button type="button" id="moveNextBtn" class="hidden">Move to Next Step</button>
+        </div>
+      </div>
+      <p><b>Current step:</b> <span id="currentStepLabel">-</span></p>
+      <p id="missingArtifacts" class="error-text"></p>
+      <p id="nextAction"></p>
+      <div class="row-actions" id="epaActionButtons"></div>
+    </section>
+
+    <section class="panel" id="phaseCardsSection">
+      <div id="phaseCards"></div>
+    </section>
+  </main>
+  <footer>EPA Framework Dashboard · Project EPA Workflow</footer>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modalTitle">Form</h3>
+      <div id="modalBody"></div>
+      <p id="modalError" class="error-text"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel" class="ghost">Cancel</button>
+        <button type="button" id="modalSubmit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/project-detail.js"></script>
+</body>
+</html>

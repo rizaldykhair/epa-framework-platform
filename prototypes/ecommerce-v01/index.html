@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPA Demo Store — E-Commerce Prototype</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <span class="badge">Prototype v0.1</span>
+      <h1 id="storeName">EPA Demo Store</h1>
+      <p>Demo Retail Client · Web-Based E-Commerce Prototype</p>
+    </div>
+    <button type="button" class="cart-btn" id="openCartBtn">🛒 Keranjang (<span id="cartCount">0</span>)</button>
+  </header>
+
+  <main>
+    <section class="grid metrics">
+      <article><p>Total Produk</p><h3 id="m-products">0</h3></article>
+      <article><p>Item di Keranjang</p><h3 id="m-cartItems">0</h3></article>
+      <article><p>Total Harga Keranjang</p><h3 id="m-cartTotal">Rp 0</h3></article>
+      <article><p>Simulasi Order</p><h3 id="m-orders">0</h3></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Katalog Produk</h2></div>
+      <div class="catalog" id="catalog"></div>
+    </section>
+
+    <section class="panel" id="cartSection">
+      <div class="panel-head"><h2>Keranjang Belanja</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Produk</th><th>Harga</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead>
+          <tbody id="cartTable"></tbody>
+        </table>
+      </div>
+      <div class="cart-summary">
+        <b>Subtotal: <span id="cartSubtotal">Rp 0</span></b>
+        <div class="row-actions">
+          <button type="button" class="secondary" id="clearCartBtn">Kosongkan Keranjang</button>
+          <button type="button" id="goCheckoutBtn">Checkout</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="checkoutSection">
+      <div class="panel-head"><h2>Checkout Simulasi</h2></div>
+      <form id="checkoutForm">
+        <input type="text" id="custName" placeholder="Nama penerima" required />
+        <input type="tel" id="custPhone" placeholder="No. HP" required />
+        <input type="text" id="custAddress" placeholder="Alamat pengiriman" required />
+        <select id="paymentMethod">
+          <option value="Cash on Delivery">Cash on Delivery</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+          <option value="E-Wallet">E-Wallet</option>
+        </select>
+        <textarea id="orderNote" rows="2" placeholder="Catatan order (opsional)"></textarea>
+        <p id="checkoutError" class="error-text"></p>
+        <button type="submit">Buat Pesanan</button>
+      </form>
+      <div id="orderSummary"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Riwayat &amp; Status Order</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Order</th><th>Total</th><th>Pembayaran</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody id="orderTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="detailOverlay" class="overlay hidden">
+    <div class="modal">
+      <button type="button" class="close-btn" id="closeDetailBtn">&times;</button>
+      <div id="detailBody"></div>
+    </div>
+  </div>
+
+  <footer>E-Commerce Initial Web Prototype · Generated output from EPA Framework</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

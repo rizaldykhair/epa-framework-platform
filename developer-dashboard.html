@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Dashboard · EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="content">
+      <div class="topbar">
+        <span id="userInfo"></span>
+        <button type="button" id="logoutBtn" class="ghost">Sign Out</button>
+      </div>
+
+      <header class="hero">
+        <div>
+          <span class="badge">Evolutionary Prototyping Agile</span>
+          <h1>Developer Dashboard</h1>
+          <p>Technical execution: backlog, prototype increments, and defect fixes.</p>
+        </div>
+        <div class="hero-card">
+          <p class="small">Sprint Completion</p>
+          <h2 id="sprintCompletion">0%</h2>
+          <span id="projectLabel">-</span>
+        </div>
+      </header>
+
+      <main>
+        <section id="section-dashboard" class="page-section">
+          <select id="dashboardProjectSelect"></select>
+          <div class="grid metrics">
+            <article><p>Assigned Tasks</p><h3 id="m-assignedTasks">0</h3></article>
+            <article><p>In Progress</p><h3 id="m-inProgress">0</h3></article>
+            <article><p>Feedback to Implement</p><h3 id="m-feedbackToImplement">0</h3></article>
+            <article><p>Open Defects Assigned</p><h3 id="m-openDefects">0</h3></article>
+            <article><p>Completed Tasks</p><h3 id="m-completed">0</h3></article>
+          </div>
+
+          <div class="panel">
+            <div class="section-head"><h2>EPA Phase Overview</h2></div>
+            <div class="grid metrics">
+              <article><p>Initial Phase</p><h3 id="epa-initial">0</h3></article>
+              <article><p>Dev &amp; Testing Phase</p><h3 id="epa-devtest">0</h3></article>
+              <article><p>Release Phase</p><h3 id="epa-release">0</h3></article>
+              <article><p>EPA Aligned</p><h3 id="epa-aligned">0</h3></article>
+            </div>
+            <div class="two-col">
+              <div>
+                <h4>Waiting for Prototype / Feedback Implementation</h4>
+                <div class="table-wrap"><table id="epaIncompleteTable"><thead><tr><th>Project</th><th>Current Step</th><th>Missing Artifacts</th></tr></thead><tbody></tbody></table></div>
+              </div>
+              <div>
+                <h4>Ready for Next Step</h4>
+                <div class="table-wrap"><table id="epaReadyTable"><thead><tr><th>Project</th><th>Current Step</th></tr></thead><tbody></tbody></table></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-projects" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>My Projects</h2></div>
+            <div class="table-wrap"><table id="projectsTable"><thead><tr><th>Name</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-sprint-tasks" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Sprint Tasks (Assigned to Me)</h2></div>
+            <div class="table-wrap"><table id="sprintTasksTable"><thead><tr><th>Backlog</th><th>Sprint</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+          <div class="panel"><div class="section-head"><h2>Backlog Assigned to Me</h2></div>
+            <div class="table-wrap"><table id="myBacklogTable"><thead><tr><th>Code</th><th>Title</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-workspace" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Prototype Development Workspace</h2><p>Execute application changes based on user feedback.</p></div>
+            <select id="workspaceProjectSelect"></select>
+
+            <h4>Sprint Backlog List</h4>
+            <div class="table-wrap"><table id="wsSprintTable"><thead><tr><th>Backlog</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+
+            <h4>Feedback Items to Implement</h4>
+            <div class="table-wrap"><table id="wsFeedbackTable"><thead><tr><th>Finding</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+
+            <h4>Development Task Board</h4>
+            <div class="table-wrap"><table id="wsTaskBoard"><thead><tr><th>Code</th><th>Title</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+
+            <h4>Prototype Increment List</h4>
+            <button type="button" id="addPrototypeBtn">Buat Prototype Increment Baru</button>
+            <button type="button" id="generateMissingPrototypeBtn" class="secondary">Generate Prototype Output (AI)</button>
+            <div class="table-wrap"><table id="wsPrototypeTable"><thead><tr><th>Version</th><th>Name</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+
+            <h4>Prototype Output</h4>
+            <div class="prototype-output" id="prototypeOutput"></div>
+          </div>
+
+          <div class="panel" id="incrementGeneratorPanel">
+            <div class="section-head"><h2>AI Prototype Increment Generator</h2><p>Generate the next prototype version from converted feedback / adaptive backlog / defects / sprint backlog - EPA-aligned, with all output links auto-filled.</p></div>
+
+            <div class="form-group">
+              <label>Source</label>
+              <div id="incSourceTabs" class="row-actions">
+                <button type="button" class="secondary inc-source-tab active" data-source="feedback">Converted Feedback</button>
+                <button type="button" class="secondary inc-source-tab" data-source="backlog">Adaptive Backlog</button>
+                <button type="button" class="secondary inc-source-tab" data-source="defect">Defects</button>
+              </div>
+              <div id="incSourceList" class="inc-source-list"></div>
+            </div>
+
+            <div class="inc-options-grid">
+              <div class="form-group">
+                <label for="incOutputType">Output Type</label>
+                <select id="incOutputType">
+                  <option value="web_app">Responsive Web App</option>
+                  <option value="adaptive_web_preview">Adaptive Web Preview</option>
+                  <option value="mobile_first_web">Mobile-First Web Preview</option>
+                  <option value="hybrid_dashboard_mobile_preview">Dashboard + Mobile Preview</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="incUiStyle">UI Style</label>
+                <select id="incUiStyle">
+                  <option value="Modern">Modern</option>
+                  <option value="Minimal">Minimal</option>
+                  <option value="Dashboard">Dashboard</option>
+                  <option value="Marketplace">Marketplace</option>
+                  <option value="Mobile App">Mobile App</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="incImageMode">Image Mode</label>
+                <select id="incImageMode">
+                  <option value="hybrid">Hybrid</option>
+                  <option value="online">Online</option>
+                  <option value="offline">Offline</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="incGallery">Include Gallery/Product Display</label>
+                <select id="incGallery">
+                  <option value="auto">Auto Detect</option>
+                  <option value="force">Force Include</option>
+                  <option value="none">Do Not Include</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row-actions">
+              <button type="button" id="incPreviewBtn" class="secondary">Preview Generation Plan</button>
+              <button type="button" id="incGenerateBtn">Generate Prototype Increment</button>
+            </div>
+
+            <div id="incPreviewResult" class="hidden"></div>
+
+            <div class="inc-options-grid" style="margin-top:14px">
+              <div class="form-group"><label>Next Version</label><input type="text" id="incNextVersion" readonly /></div>
+              <div class="form-group"><label>Demo URL</label><input type="text" id="incDemoUrl" readonly /></div>
+              <div class="form-group"><label>Preview URL</label><input type="text" id="incMobilePreviewUrl" readonly /></div>
+              <div class="form-group"><label>Repository URL</label><input type="text" id="incRepoUrl" readonly /></div>
+              <div class="form-group"><label>Build Output URL</label><input type="text" id="incBuildUrl" readonly /></div>
+              <div class="form-group"><label>Mobile Preview Link</label><input type="text" id="incMobileLink" readonly /></div>
+            </div>
+
+            <div class="row-actions">
+              <button type="button" id="incOpenDemoBtn" class="secondary" disabled>Open Prototype</button>
+              <button type="button" id="incOpenPreviewBtn" class="secondary" disabled>Open Adaptive Preview</button>
+              <button type="button" id="incOpenMobileBtn" class="secondary" disabled>Open Mobile Preview</button>
+              <button type="button" id="incCopyLinksBtn" class="secondary" disabled>Copy Links</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-feedback-impl" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Feedback Implementation</h2></div>
+            <div class="table-wrap"><table id="feedbackImplTable"><thead><tr><th>Finding</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-prototypes" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Prototype Increment</h2><p>Create a new increment from the Development Workspace menu.</p></div>
+            <div class="table-wrap"><table id="prototypesTable"><thead><tr><th>Version</th><th>Demo URL</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-defect-fixing" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Defect Fixing</h2></div>
+            <div class="table-wrap"><table id="defectsTable"><thead><tr><th>Description</th><th>Severity</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-notes" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Technical Notes</h2><p>Technical notes per prototype increment.</p></div>
+            <div class="table-wrap"><table id="notesTable"><thead><tr><th>Version</th><th>Notes</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+      </main>
+      <footer>Developer Dashboard · EPA Framework Platform</footer>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modalTitle">Form</h3>
+      <div id="modalBody"></div>
+      <p id="modalError" class="error-text"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel" class="ghost">Cancel</button>
+        <button type="button" id="modalSubmit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/sidebar.js?v=4"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/developer.js?v=4"></script>
+</body>
+</html>

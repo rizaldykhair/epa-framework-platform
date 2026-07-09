@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluator Dashboard · EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="content">
+      <div class="topbar">
+        <span id="userInfo"></span>
+        <button type="button" id="logoutBtn" class="ghost">Sign Out</button>
+      </div>
+
+      <header class="hero">
+        <div>
+          <span class="badge">Evolutionary Prototyping Agile</span>
+          <h1>Evaluator Dashboard</h1>
+          <p>Evaluate the prototype and share your feedback as a user/stakeholder.</p>
+        </div>
+        <div class="hero-card">
+          <p class="small">Current EPA Phase</p>
+          <h2 id="currentPhase" style="font-size:22px">-</h2>
+          <span id="projectLabel">-</span>
+        </div>
+      </header>
+
+      <main>
+        <section id="section-dashboard" class="page-section">
+          <div class="dashboard-action-bar">
+            <select id="dashboardProjectSelect"></select>
+            <button type="button" id="viewEpaWorkflowBtn" class="secondary">View EPA Workflow</button>
+          </div>
+          <div class="grid metrics">
+            <article><p>Prototype Version</p><h3 id="m-version" style="font-size:22px">-</h3></article>
+            <article><p>Evaluation Status</p><h3 id="m-evalStatus" style="font-size:22px">-</h3></article>
+            <article><p>Submitted Feedback</p><h3 id="m-submittedFeedback">0</h3></article>
+            <article><p>Pending Evaluation</p><h3 id="m-pending" style="font-size:22px">-</h3></article>
+          </div>
+          <div class="panel">
+            <div class="section-head"><h2>Feedback Decision Status</h2></div>
+            <div class="table-wrap"><table id="decisionTable"><thead><tr><th>Decision</th><th>Count</th></tr></thead><tbody></tbody></table></div>
+          </div>
+
+          <div class="panel">
+            <div class="section-head"><h2>EPA Phase Overview</h2></div>
+            <div class="grid metrics">
+              <article><p>Initial Phase</p><h3 id="epa-initial">0</h3></article>
+              <article><p>Dev &amp; Testing Phase</p><h3 id="epa-devtest">0</h3></article>
+              <article><p>Release Phase</p><h3 id="epa-release">0</h3></article>
+              <article><p>EPA Aligned</p><h3 id="epa-aligned">0</h3></article>
+            </div>
+            <div class="two-col">
+              <div>
+                <h4>Waiting for Evaluation</h4>
+                <div class="table-wrap"><table id="epaIncompleteTable"><thead><tr><th>Project</th><th>Current Step</th><th>Missing Artifacts</th></tr></thead><tbody></tbody></table></div>
+              </div>
+              <div>
+                <h4>Ready for Next Step</h4>
+                <div class="table-wrap"><table id="epaReadyTable"><thead><tr><th>Project</th><th>Current Step</th></tr></thead><tbody></tbody></table></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-demo" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Prototype Demo</h2></div>
+            <div class="table-wrap"><table id="demoTable"><thead><tr><th>Version</th><th>Demo Link</th><th>Notes</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-evaluation" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Prototype Evaluation Page</h2></div>
+            <p><b>Project:</b> <span id="evalProjectName">-</span></p>
+            <select id="evalPrototypeSelect"></select>
+            <p><b>Evaluation Date:</b> <span id="evalDate"></span></p>
+            <p><b>Demo:</b> <span id="evalDemoUrl">-</span></p>
+            <div class="form-group"><label>Ease of Use Rating (1-5)</label><select id="evalEaseOfUse"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select></div>
+            <div class="form-group"><label>Feature Completeness Rating (1-5)</label><select id="evalFeatureCompleteness"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select></div>
+            <div class="form-group"><label>Interface Design Rating (1-5)</label><select id="evalInterfaceDesign"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select></div>
+            <div class="form-group"><label>Performance Rating (1-5)</label><select id="evalPerformance"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select></div>
+            <div class="form-group"><label>Overall Satisfaction Rating (1-5)</label><select id="evalOverall"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select></div>
+            <div class="form-group"><label>What Works Well</label><textarea id="evalWorksWell" rows="2"></textarea></div>
+            <div class="form-group"><label>Problems Found</label><textarea id="evalProblems" rows="2"></textarea></div>
+            <div class="form-group"><label>Improvement Suggestions</label><textarea id="evalSuggestion" rows="2"></textarea></div>
+            <div class="form-group"><label>Feedback Priority</label>
+              <select id="evalPriority"><option>Must</option><option selected>Should</option><option>Could</option></select>
+            </div>
+            <p id="evalError" class="error-text"></p>
+            <button type="button" id="submitEvalBtn">Submit Feedback</button>
+
+            <div class="section-head" style="margin-top:22px"><h2>Evaluation History</h2></div>
+            <div class="table-wrap"><table id="evalHistoryTable"><thead><tr><th>Prototype</th><th>Overall</th><th>Priority</th><th>Suggestion</th><th>When</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-feedback" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>Submit Feedback</h2></div>
+            <div class="form-group"><label>Finding</label><textarea id="fbFinding" rows="3" placeholder="Example: Add-to-cart button isn't prominent enough"></textarea></div>
+            <p id="fbError" class="error-text"></p>
+            <button type="button" id="submitFeedbackBtn">Submit Feedback</button>
+          </div>
+        </section>
+
+        <section id="section-history" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Feedback History</h2></div>
+            <div class="table-wrap"><table id="historyTable"><thead><tr><th>Finding</th><th>Decision</th><th>Status</th><th>Implementation Status</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+      </main>
+      <footer>Evaluator Dashboard · EPA Framework Platform</footer>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/sidebar.js?v=4"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/evaluator.js?v=2"></script>
+</body>
+</html>

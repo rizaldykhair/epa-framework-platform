@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tester Dashboard · EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="content">
+      <div class="topbar">
+        <span id="userInfo"></span>
+        <button type="button" id="logoutBtn" class="ghost">Sign Out</button>
+      </div>
+
+      <header class="hero">
+        <div>
+          <span class="badge">Evolutionary Prototyping Agile</span>
+          <h1>Tester Dashboard</h1>
+          <p>Test the prototype, report defects, and run regression checks on every increment.</p>
+        </div>
+        <div class="hero-card">
+          <p class="small">Testing Completion</p>
+          <h2 id="testingCompletion">0%</h2>
+          <span id="projectLabel">-</span>
+        </div>
+      </header>
+
+      <main>
+        <section id="section-dashboard" class="page-section">
+          <select id="dashboardProjectSelect"></select>
+          <div class="grid metrics">
+            <article><p>Prototypes Waiting</p><h3 id="m-waitingPrototypes">0</h3></article>
+            <article><p>Total Test Cases</p><h3 id="m-totalTests">0</h3></article>
+            <article><p>Passed</p><h3 id="m-passed">0</h3></article>
+            <article><p>Failed</p><h3 id="m-failed">0</h3></article>
+            <article><p>Not Run</p><h3 id="m-notRun">0</h3></article>
+            <article><p>Retest Required</p><h3 id="m-retest">0</h3></article>
+            <article><p>Open Defects</p><h3 id="m-openDefects">0</h3></article>
+            <article><p>Critical Defects</p><h3 id="m-criticalDefects">0</h3></article>
+          </div>
+
+          <div class="panel">
+            <div class="section-head"><h2>EPA Phase Overview</h2></div>
+            <div class="grid metrics">
+              <article><p>Initial Phase</p><h3 id="epa-initial">0</h3></article>
+              <article><p>Dev &amp; Testing Phase</p><h3 id="epa-devtest">0</h3></article>
+              <article><p>Release Phase</p><h3 id="epa-release">0</h3></article>
+              <article><p>EPA Aligned</p><h3 id="epa-aligned">0</h3></article>
+            </div>
+            <div class="two-col">
+              <div>
+                <h4>Not Yet Ready for Testing</h4>
+                <div class="table-wrap"><table id="epaIncompleteTable"><thead><tr><th>Project</th><th>Current Step</th><th>Missing Artifacts</th></tr></thead><tbody></tbody></table></div>
+              </div>
+              <div>
+                <h4>Ready for Next Step</h4>
+                <div class="table-wrap"><table id="epaReadyTable"><thead><tr><th>Project</th><th>Current Step</th></tr></thead><tbody></tbody></table></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-projects" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>My Projects</h2></div>
+            <div class="table-wrap"><table id="projectsTable"><thead><tr><th>Name</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-workspace" class="page-section hidden">
+          <div class="panel">
+            <div class="section-head"><h2>EPA Testing Workspace</h2></div>
+            <select id="workspaceProjectSelect"></select>
+            <select id="workspacePrototypeSelect"><option value="">All Prototypes</option></select>
+            <div id="prototypeInfo"></div>
+            <button type="button" id="addTestBtn">Add Test Scenario</button>
+            <div class="table-wrap">
+              <table id="workspaceTable">
+                <thead><tr><th>Code</th><th>Scenario</th><th>Type</th><th>Status</th><th>Severity</th><th>Notes/Evidence</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-test-cases" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Test Case Management</h2><button type="button" id="addTestBtn2">Add Test Case</button></div>
+            <div class="table-wrap"><table id="testCasesTable"><thead><tr><th>Code</th><th>Scenario</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-defects" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Defect Reporting</h2></div>
+            <div class="table-wrap"><table id="defectsTable"><thead><tr><th>Description</th><th>Severity</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-regression" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Regression Testing</h2><button type="button" id="addRegressionBtn">Add Regression Test</button></div>
+            <div class="table-wrap"><table id="regressionTable"><thead><tr><th>Code</th><th>Scenario</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <section id="section-report" class="page-section hidden">
+          <div class="panel"><div class="section-head"><h2>Testing Report</h2></div>
+            <div class="grid metrics">
+              <article><p>Total</p><h3 id="rep-total">0</h3></article>
+              <article><p>Passed</p><h3 id="rep-pass">0</h3></article>
+              <article><p>Failed</p><h3 id="rep-fail">0</h3></article>
+              <article><p>Completion</p><h3 id="rep-completion">0%</h3></article>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>Dashboard · EPA Framework Platform</footer>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modalTitle">Form</h3>
+      <div id="modalBody"></div>
+      <p id="modalError" class="error-text"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel" class="ghost">Cancel</button>
+        <button type="button" id="modalSubmit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/sidebar.js?v=4"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/tester.js?v=2"></script>
+</body>
+</html>

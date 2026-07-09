@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPA Workboard · EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="epa-workboard.css?v=3" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="content">
+      <div class="topbar">
+        <span id="userInfo"></span>
+        <button type="button" id="logoutBtn" class="ghost">Sign Out</button>
+      </div>
+
+      <header class="hero wb-hero">
+        <div>
+          <span class="badge">Evolutionary Prototyping Agile</span>
+          <h1>EPA Workboard</h1>
+          <p>Manage backlog, sprint tasks, prototypes, testing, and defects in one board - aligned with the EPA 3-phase / 11-step workflow.</p>
+        </div>
+        <div class="hero-card">
+          <p class="small">Project</p>
+          <select id="wbProjectSelect"></select>
+          <button type="button" id="wbSyncBtn" class="wb-sync-btn">Sync Artifacts</button>
+        </div>
+      </header>
+
+      <main>
+        <div class="grid metrics wb-summary" id="wbSummary"></div>
+
+        <div class="wb-filterbar">
+          <input type="text" id="wbSearch" placeholder="Search tasks..." />
+          <select id="wbFilterArtifact">
+            <option value="">All Types</option>
+            <option value="requirement">Requirement</option>
+            <option value="backlog">Backlog</option>
+            <option value="sprint_item">Sprint Task</option>
+            <option value="prototype_task">Prototype</option>
+            <option value="feedback_implementation">Feedback Implementation</option>
+            <option value="test_case">Test Case</option>
+            <option value="defect">Defect</option>
+            <option value="release_task">Release Task</option>
+            <option value="retrospective_action">Retrospective Action</option>
+            <option value="evaluation_task">Evaluation Task</option>
+            <option value="app_requirement">App Requirement</option>
+          </select>
+          <select id="wbFilterPriority">
+            <option value="">All Priorities</option>
+            <option value="Must">Must</option>
+            <option value="Should">Should</option>
+            <option value="Could">Could</option>
+            <option value="Wont">Won't</option>
+          </select>
+          <select id="wbFilterAssignee">
+            <option value="">All Assignees</option>
+          </select>
+          <button type="button" id="wbClearFilters" class="ghost">Reset Filter</button>
+          <button type="button" id="wbAddWorkItemBtn">+ Add Work Item</button>
+        </div>
+
+        <div class="wb-board" id="wbBoard"></div>
+      </main>
+      <footer>EPA Workboard · EPA Framework Platform</footer>
+    </div>
+  </div>
+
+  <div id="wbDrawerOverlay" class="wb-drawer-overlay hidden">
+    <aside class="wb-drawer">
+      <div class="wb-drawer-head">
+        <h3 id="wbDrawerTitle">Task</h3>
+        <button type="button" id="wbDrawerClose" class="ghost">Close</button>
+      </div>
+      <div class="wb-drawer-body" id="wbDrawerBody"></div>
+    </aside>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modalTitle">Form</h3>
+      <div id="modalBody"></div>
+      <p id="modalError" class="error-text"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel" class="ghost">Cancel</button>
+        <button type="button" id="modalSubmit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/sidebar.js?v=4"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/epa-workboard.js?v=2"></script>
+</body>
+</html>

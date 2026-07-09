@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>E-Commerce Prototype · Prototype Preview</title>
+<style>
+:root{--primary:#0b4a3a;--secondary:#17845f;--bg:#f6faf8;--surface:#fff;--text:#16211d;--muted:#6b7280;--border:#d9e7df;--radius:18px;--shadow:0 12px 30px rgba(15,23,42,.08)}
+*{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.preview-header{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:20px 5vw}
+.preview-header h1{margin:4px 0;font-size:20px}
+.preview-header p{margin:0;opacity:.85;font-size:13px}
+.device-switcher{display:flex;justify-content:center;gap:8px;padding:16px;flex-wrap:wrap}
+.device-switcher button{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 18px;font-weight:700;font-size:13px;cursor:pointer}
+.device-switcher button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.device-switcher a.open-full{border:1px solid var(--border);background:var(--surface);color:var(--primary);border-radius:999px;padding:9px 18px;font-weight:700;font-size:13px;text-decoration:none}
+.preview-stage{display:flex;justify-content:center;padding:0 16px 40px}
+.preview-frame-wrap{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;transition:width .2s ease;overflow:hidden;width:100%;max-width:1200px}
+.preview-frame-wrap.tablet{max-width:768px}
+.preview-frame-wrap.mobile{max-width:390px}
+iframe{width:100%;height:78vh;border:0;border-radius:12px;display:block}
+</style>
+</head>
+<body>
+<header class="preview-header">
+  <span style="font-size:12px;font-weight:700;opacity:.85">PROTOTYPE PREVIEW</span>
+  <h1>E-Commerce Prototype</h1>
+  <p>Version v0.5</p>
+</header>
+<div class="device-switcher">
+  <button type="button" data-device="desktop" class="active">Desktop</button>
+  <button type="button" data-device="tablet">Tablet</button>
+  <button type="button" data-device="mobile">Mobile</button>
+  <a class="open-full" href="index.html" target="_blank" rel="noopener">Open Full Prototype</a>
+</div>
+<div class="preview-stage">
+  <div class="preview-frame-wrap" id="frameWrap"><iframe src="index.html" id="previewFrame"></iframe></div>
+</div>
+<script>
+function setDevice(device) {
+  document.getElementById('frameWrap').className = 'preview-frame-wrap' + (device === 'desktop' ? '' : ' ' + device);
+  document.querySelectorAll('.device-switcher button').forEach((b) => b.classList.toggle('active', b.dataset.device === device));
+}
+document.querySelectorAll('.device-switcher button').forEach((b) => b.addEventListener('click', () => setDevice(b.dataset.device)));
+const requestedDevice = new URLSearchParams(window.location.search).get('device');
+if (requestedDevice) setDevice(requestedDevice);
+</script>
+</body>
+</html>

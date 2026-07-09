@@ -1,0 +1,34 @@
+:root{--ink:#173b2e;--muted:#5f7267;--bg:#f3f8f5;--card:#fff;--line:#dbe8e1;--brand:#0e6b4f;--brand-dark:#0a4d38;--accent:#2ba36c}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.topbar{background:linear-gradient(135deg,var(--brand-dark),var(--brand));color:#fff;padding:28px 5vw}
+.topbar h1{margin:8px 0;font-size:30px}
+.topbar p{margin:0;opacity:.9}
+.badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}
+main{padding:24px 5vw 48px}
+.grid{display:grid;gap:14px}
+.metrics{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:20px}
+.metrics article{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(14,107,79,.06)}
+.metrics p{color:var(--muted);margin:0 0 6px;font-size:13px}
+.metrics h3{margin:0;font-size:24px;color:var(--brand-dark)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.panel-head h2{margin:0 0 12px;color:var(--brand-dark);font-size:18px}
+form{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+input,select{border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:14px;font-family:inherit}
+button{border:0;background:var(--brand);color:#fff;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:14px}
+button.secondary{background:var(--accent)}
+button.wa{background:#25d366}
+.price-preview{font-size:13px;color:var(--muted);font-weight:600}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--brand-dark);color:#fff;font-weight:600}
+.pill{display:inline-block;padding:4px 9px;border-radius:999px;background:#e6f3ec;color:var(--brand-dark);font-weight:700;font-size:11px}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.row-actions button,.row-actions select{padding:5px 8px;font-size:12px}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:13px}
+@media(max-width:900px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+}

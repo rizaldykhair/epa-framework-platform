@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPA Project Simulation · Smart Laundry Mobile App</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="topbar">
+    <span id="userInfo"></span>
+    <button type="button" id="backBtn" class="ghost">Back to Dashboard</button>
+  </div>
+
+  <header class="hero">
+    <div>
+      <span class="badge">EPA Project Simulation</span>
+      <h1>Smart Laundry Mobile App</h1>
+      <p id="projectIdentity">Loading project data...</p>
+    </div>
+    <div class="hero-card">
+      <p class="small">Current EPA Phase</p>
+      <h2 id="currentPhase" style="font-size:22px">-</h2>
+      <span id="projectStatus">-</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="section-head"><h2>Phase 1 — Requirements Elicitation &amp; Project Adaptive Backlog</h2></div>
+      <div class="table-wrap">
+        <table id="phase1Table"><thead><tr><th>Code</th><th>Requirement</th><th>User Story</th><th>Priority</th><th>Status</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><h2>Phase 2 — Initial Prototype Design &amp; Sprint Backlog</h2></div>
+      <p><b>Sprint:</b> <span id="sprintName">-</span></p>
+      <div class="table-wrap">
+        <table id="sprintItemsTable"><thead><tr><th>Backlog</th><th>Status</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div id="prototypeCard"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><h2>Phase 3 — Demo, Evaluation, Feedback, Testing &amp; Backlog Update</h2></div>
+      <h4>Feedback Conversion Flow</h4>
+      <div class="table-wrap">
+        <table id="feedbackFlowTable"><thead><tr><th>Feedback</th><th>Decision</th><th>Reason</th><th>Backlog Created</th></tr></thead><tbody></tbody></table>
+      </div>
+      <h4>Testing Result</h4>
+      <div class="table-wrap">
+        <table id="testResultTable"><thead><tr><th>Code</th><th>Scenario</th><th>Result</th></tr></thead><tbody></tbody></table>
+      </div>
+      <h4>Defect List</h4>
+      <div class="table-wrap">
+        <table id="defectListTable"><thead><tr><th>Title</th><th>Severity</th><th>Status</th></tr></thead><tbody></tbody></table>
+      </div>
+      <h4>Updated Backlog (from feedback)</h4>
+      <div class="table-wrap">
+        <table id="updatedBacklogTable"><thead><tr><th>Code</th><th>Title</th><th>Priority</th><th>Status</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <section class="two-col">
+      <div class="panel">
+        <div class="section-head"><h2>Role Activity Summary</h2></div>
+        <div class="table-wrap">
+          <table id="roleActivityTable"><thead><tr><th>Role</th><th>Activity</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h2>Simulation Metrics</h2></div>
+        <div class="grid metrics">
+          <article><p>Total Backlog</p><h3 id="m-backlog">0</h3></article>
+          <article><p>Feedback Converted</p><h3 id="m-converted">0</h3></article>
+          <article><p>Failed Tests</p><h3 id="m-failed">0</h3></article>
+          <article><p>Open Defects</p><h3 id="m-defects">0</h3></article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>Platform Dashboard · EPA Project Simulation Report</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/simulation.js"></script>
+</body>
+</html>

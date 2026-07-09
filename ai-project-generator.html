@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Project Generator — EPA Framework</title>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <div class="topbar">
+    <span id="userInfo"></span>
+    <button type="button" id="backBtn" class="ghost">Back to Dashboard</button>
+  </div>
+
+  <header class="hero">
+    <div>
+      <span class="badge">Evolutionary Prototyping Agile</span>
+      <h1>AI Project Generator</h1>
+      <p>Enter your application requirements, and the EPA Framework will automatically generate the project, backlog, sprint, and a ready-to-open prototype output.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" id="requestFormSection">
+      <div class="section-head"><h2>A. Basic Project Information</h2></div>
+      <form id="requirementForm">
+        <div class="form-group"><label>Application Name</label><input type="text" id="f-application_name" required /></div>
+        <div class="form-group"><label>Client / Organization Name</label><input type="text" id="f-client_name" /></div>
+        <div class="form-group"><label>Project Type</label>
+          <select id="f-project_type"><option>Web-Based Application</option><option>Mobile App</option><option>Web + Mobile</option></select>
+        </div>
+        <div class="form-group"><label>Target Users</label><input type="text" id="f-target_users" /></div>
+        <div class="form-group"><label>Business Problem</label><textarea id="f-business_problem" rows="2"></textarea></div>
+        <div class="form-group"><label>Main Objective</label><textarea id="f-main_objective" rows="2"></textarea></div>
+
+        <div class="section-head"><h2>B. Functional Requirements</h2></div>
+        <div class="form-group"><label>Main Features Needed (one per line)</label><textarea id="f-main_features" rows="4"></textarea></div>
+        <div class="form-group"><label>User Roles Needed</label><input type="text" id="f-user_roles_needed" /></div>
+        <div class="form-group"><label>Data to be Managed (comma-separated)</label><input type="text" id="f-data_entities" /></div>
+        <div class="form-group"><label>Workflow Description</label><textarea id="f-workflow_description" rows="2"></textarea></div>
+        <div class="form-group"><label>Reporting Needs</label><textarea id="f-reporting_needs" rows="2"></textarea></div>
+
+        <div class="section-head"><h2>C. UI/UX Preference</h2></div>
+        <div class="form-group"><label>Design Style</label>
+          <select id="f-design_style"><option>Simple</option><option selected>Modern</option><option>Corporate</option><option>Marketplace</option><option>Dashboard</option></select>
+        </div>
+        <div class="form-group"><label>Primary Color</label><input type="color" id="f-primary_color" value="#0b4a3a" /></div>
+        <div class="form-group"><label>Layout Preference</label>
+          <select id="f-layout_preference">
+            <option>Dashboard</option><option>Landing Page + Dashboard</option><option>CRUD System</option>
+            <option>Marketplace Catalog</option><option>Booking System</option><option>Tracking System</option>
+          </select>
+        </div>
+
+        <p id="formError" class="error-text"></p>
+        <div class="row-actions" id="actionButtons">
+          <button type="submit" id="submitRequirementBtn">Submit Requirement</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel hidden" id="planSection">
+      <div class="section-head"><h2>Preview Generated EPA Plan</h2></div>
+      <h4>Requirements</h4>
+      <div class="table-wrap"><table><thead><tr><th>Title</th><th>Priority</th></tr></thead><tbody id="planRequirements"></tbody></table></div>
+      <h4>Backlog</h4>
+      <div class="table-wrap"><table><thead><tr><th>Code</th><th>Title</th><th>Priority</th></tr></thead><tbody id="planBacklog"></tbody></table></div>
+      <h4>Sprint 1</h4>
+      <p id="planSprint"></p>
+      <h4>Prototype Modules</h4>
+      <ul class="checklist" id="planModules"></ul>
+      <h4>Suggested Test Cases</h4>
+      <ul class="checklist" id="planTests"></ul>
+      <div class="row-actions">
+        <button type="button" id="confirmGenerateBtn">Confirm &amp; Generate Project</button>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="resultSection">
+      <div class="section-head"><h2>Generated Successfully</h2></div>
+      <p id="resultSummary"></p>
+      <p><b>Demo URL:</b> <span id="resultDemoUrl"></span></p>
+      <div class="row-actions">
+        <button type="button" id="openGeneratedBtn">Open Generated Prototype</button>
+      </div>
+    </section>
+
+    <section class="panel" id="history">
+      <div class="section-head"><h2>AI Generation History</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Application</th><th>Status</th><th>Demo URL</th><th>Requested</th><th>Actions</th></tr></thead>
+          <tbody id="historyTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer>EPA Framework Dashboard · AI Project Generator (Mode 1: Local Template-Based)</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/role-router.js"></script>
+  <script src="js/components/ui.js"></script>
+  <script src="js/pages/ai-generator.js"></script>
+</body>
+</html>
