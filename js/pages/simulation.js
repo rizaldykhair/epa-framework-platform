@@ -1,7 +1,7 @@
 (function () {
   const user = getUser();
   if (!getToken() || !user) { window.location.href = 'index.html'; return; }
-  document.getElementById('userInfo').textContent = `${user.name} · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('backBtn').addEventListener('click', () => redirectToDashboard(user.role));
 
   (async function init() {

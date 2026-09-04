@@ -1,13 +1,13 @@
 (function () {
   const user = getUser();
   if (!getToken() || !user) { window.location.href = 'index.html'; return; }
-  document.getElementById('userInfo').textContent = `${user.name} · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('backBtn').addEventListener('click', () => redirectToDashboard(user.role));
 
   const params = new URLSearchParams(window.location.search);
   const projectId = Number(params.get('id'));
   if (!projectId) {
-    alert('Project ID tidak ditemukan di URL.');
+    alert('Project ID not found in URL.');
     redirectToDashboard(user.role);
     return;
   }
@@ -33,7 +33,7 @@
 
   function render() {
     document.getElementById('projectName').textContent = project.name;
-    document.getElementById('projectMeta').textContent = `${project.project_code || 'No code'} · ${project.project_type || '-'} · ${pill(project.status)}`;
+    document.getElementById('projectMeta').innerHTML = `${project.project_code || 'No code'} · ${project.project_type || '-'} · ${pill(project.status)}`;
     document.getElementById('completionPct').textContent = status.completion_percentage + '%';
     document.getElementById('epaStatusPill').innerHTML = pill(status.current_phase);
     document.getElementById('currentStepLabel').textContent = `${status.current_step_name} (${status.current_phase})`;

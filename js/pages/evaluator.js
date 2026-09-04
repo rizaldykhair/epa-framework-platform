@@ -2,7 +2,7 @@
   const user = guardDashboard('Evaluator');
   if (!user) return;
 
-  document.getElementById('userInfo').textContent = `Welcome · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('logoutBtn').addEventListener('click', logout);
   document.getElementById('viewEpaWorkflowBtn').addEventListener('click', () => {
     if (projectId) window.location.href = `project-detail.html?id=${projectId}`;
@@ -45,8 +45,8 @@
     const latestProto = prototypes[0];
     document.getElementById('m-version').textContent = latestProto ? (latestProto.version_number || latestProto.version_label) : '-';
     const evaluated = latestProto && myEvals.some((e) => e.prototype_id === latestProto.id);
-    document.getElementById('m-evalStatus').textContent = latestProto ? (evaluated ? 'Sudah dievaluasi' : 'Belum dievaluasi') : '-';
-    document.getElementById('m-pending').textContent = latestProto && !evaluated ? 'Ya' : 'Tidak';
+    document.getElementById('m-evalStatus').textContent = latestProto ? (evaluated ? 'Evaluated' : 'Not Evaluated') : '-';
+    document.getElementById('m-pending').textContent = latestProto && !evaluated ? 'Yes' : 'No';
     document.getElementById('m-submittedFeedback').textContent = feedback.length;
 
     const byDecision = { Clarify: 0, Converted: 0, Rejected: 0 };
@@ -125,7 +125,7 @@
     const errorEl = document.getElementById('fbError');
     errorEl.textContent = '';
     const finding = document.getElementById('fbFinding').value.trim();
-    if (!finding) { errorEl.textContent = 'Finding tidak boleh kosong'; return; }
+    if (!finding) { errorEl.textContent = 'Finding cannot be empty'; return; }
     try {
       await api(`/projects/${projectId}/feedback`, { method: 'POST', body: { finding } });
       document.getElementById('fbFinding').value = '';

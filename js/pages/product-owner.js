@@ -2,7 +2,7 @@
   const user = guardDashboard('Product Owner');
   if (!user) return;
 
-  document.getElementById('userInfo').textContent = `Welcome · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('logoutBtn').addEventListener('click', logout);
 
   let projects = [];
@@ -211,7 +211,7 @@
     openModal({
       title: `Assign to Sprint (${selectedBacklogIds.size} backlog item(s) selected)`,
       fields: [
-        { name: 'sprint_id', label: 'Existing Sprint (kosongkan jika buat baru)', type: 'select', options: [{ value: '', label: '- Buat Sprint Baru -' }, ...activeSprints.map((s) => ({ value: s.id, label: s.name }))] },
+        { name: 'sprint_id', label: 'Existing Sprint (leave blank to create new)', type: 'select', options: [{ value: '', label: '- Create New Sprint -' }, ...activeSprints.map((s) => ({ value: s.id, label: s.name }))] },
         { name: 'sprint_name', label: 'New Sprint Name (if creating new)' },
         { name: 'start_date', label: 'Start Date', type: 'date' },
         { name: 'end_date', label: 'End Date', type: 'date' },

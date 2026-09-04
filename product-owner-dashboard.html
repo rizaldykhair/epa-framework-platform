@@ -4,15 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Owner Dashboard · EPA Framework</title>
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=13" />
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="content">
       <div class="topbar">
-        <span id="userInfo"></span>
-        <button type="button" id="logoutBtn" class="ghost">Sign Out</button>
+        <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">&#9776;</button>
+        <div class="topbar-search"><input type="text" id="topbarSearch" placeholder="Search this page..." /></div>
+        <button type="button" class="icon-btn" aria-label="Notifications" title="Notifications"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></button>
+        <div class="topbar-profile">
+          <span id="userInfo"></span>
+          <button type="button" id="logoutBtn" class="ghost"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M15 8l4 4-4 4M19 12H9"/></svg>Sign Out</button>
+        </div>
       </div>
 
       <header class="hero">
@@ -31,7 +37,7 @@
       <main>
         <section id="section-dashboard" class="page-section">
           <select id="dashboardProjectSelect"></select>
-          <div class="grid metrics">
+          <div class="grid metrics metric-grid">
             <article><p>Total Backlog</p><h3 id="m-totalBacklog">0</h3></article>
             <article><p>Feedback Conversion</p><h3 id="m-feedbackRate">0%</h3></article>
             <article><p>Task Success</p><h3 id="m-taskSuccess">0%</h3></article>
@@ -153,8 +159,8 @@
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/role-router.js"></script>
-  <script src="js/components/sidebar.js?v=4"></script>
-  <script src="js/components/ui.js"></script>
-  <script src="js/pages/product-owner.js?v=3"></script>
+  <script src="js/components/sidebar.js?v=7"></script>
+  <script src="js/components/ui.js?v=3"></script>
+  <script src="js/pages/product-owner.js?v=5"></script>
 </body>
 </html>

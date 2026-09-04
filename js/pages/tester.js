@@ -2,7 +2,7 @@
   const user = guardDashboard('Tester');
   if (!user) return;
 
-  document.getElementById('userInfo').textContent = `Welcome · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('logoutBtn').addEventListener('click', logout);
 
   let projects = [];

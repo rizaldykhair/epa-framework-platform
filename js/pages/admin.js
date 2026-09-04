@@ -2,7 +2,7 @@
   const user = guardDashboard('Admin');
   if (!user) return;
 
-  document.getElementById('userInfo').textContent = `Welcome · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('logoutBtn').addEventListener('click', logout);
 
   let projects = [];
@@ -219,7 +219,7 @@
     const phases = await api(`/projects/${currentPhasesProjectId}/phases`);
     const p = phases.find((x) => x.id === id);
     openModal({
-      title: 'Edit Fase',
+      title: 'Edit Phase',
       fields: [
         { name: 'name', label: 'Phase Name' },
         { name: 'stage_label', label: 'Stage' },

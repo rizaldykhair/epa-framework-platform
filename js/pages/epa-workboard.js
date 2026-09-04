@@ -28,7 +28,7 @@
   if (!getToken() || !user) { window.location.href = 'index.html'; return; }
   if (!ALLOWED_ROLES.includes(user.role)) { redirectToDashboard(user.role); return; }
 
-  document.getElementById('userInfo').textContent = `${user.name} · ${user.role}`;
+  document.getElementById('userInfo').innerHTML = renderUserChip(user);
   document.getElementById('logoutBtn').addEventListener('click', logout);
   renderSidebar(user.role, null, () => {});
   if (!['Admin', 'Product Owner'].includes(user.role)) {
