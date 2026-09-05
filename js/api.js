@@ -1,4 +1,9 @@
-const API_BASE = 'http://localhost/epa-framework/backend/public/api/v1';
+// Local dev (this repo's XAMPP setup) keeps its explicit localhost path; any other
+// host (e.g. a production domain) assumes the backend is deployed alongside the
+// frontend at <same origin>/backend/public - no per-deploy edit needed.
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost/epa-framework/backend/public/api/v1'
+  : window.location.origin + '/backend/public/api/v1';
 
 async function api(path, { method = 'GET', body } = {}) {
   const headers = { 'Content-Type': 'application/json' };
